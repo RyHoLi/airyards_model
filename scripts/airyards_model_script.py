@@ -32,7 +32,7 @@ df_target = model_data_df_train.dropna(subset=['recent_racr'])['actual_fantasy_p
 scaler = MinMaxScaler(feature_range=(0,1))
 df_predictors2 = scaler.fit_transform(df_predictors)
 
-X_train, X_test, y_train, y_test = train_test_split(df_predictors2, df_target, test_size = 0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(df_predictors2, df_target, test_size = 0.2, random_state=23)
 
 # Function to get model results
 def print_results(results):
@@ -49,7 +49,7 @@ model_path = 'C:/Users/Ryan/Documents/air_yards_model/scripts/'
 #RF model
 rfr = RandomForestRegressor()
 parameters = {
-    'n_estimators': [5, 50, 200],
+    'n_estimators': [5, 10, 50, 100, 200],
     'max_depth': [2,4,8,16,32, None]
 }
 
@@ -68,7 +68,7 @@ R_sq_rf = corr_rf**2
 print(R_sq_rf)
 
 '''
-R^2 = 0.2586613982600278
+R^2 = 0.2688557662958524
 '''
 
 # GBM model
@@ -98,7 +98,6 @@ R^2 = 0.2585856087328074
 '''
 
 
-
 # predict on most recent data
 predict_data = pd.read_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_predict_data.csv')
 predict_data2 = predict_data.iloc[:, np.r_[3:22]]
@@ -115,4 +114,4 @@ final_df['difference'] =  final_df['pred_fpts'] - final_df['season_avg_fantasy_p
 final_df_results = final_df[['name', 'season_avg_fantasy_points_ppr', 'pred_fpts', 'difference']]
 
 final_df.to_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_predictions.csv', index=False)
-final_df_results.to_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_clean_predictions.csv', index=False)
+final_df_results.to_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_clean_predictions_wk5.csv', index=False)
