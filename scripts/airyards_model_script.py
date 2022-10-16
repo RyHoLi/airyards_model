@@ -16,7 +16,7 @@ from sklearn.neural_network import MLPRegressor
 import joblib
 
 model_data_df = pd.read_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_data.csv')
-model_data_df_train = model_data_df[model_data_df['season'] < 2022]
+model_data_df_train = model_data_df[(model_data_df['season'] < 2022)]
 
 # predictors are all fields except for player_id, name, pred_season, pred_fantasy_points, pct_increase, breakout
 df_predictors = model_data_df_train.iloc[:, np.r_[3:27]]
@@ -70,7 +70,7 @@ R_sq_rf = corr_rf**2
 print(R_sq_rf)
 
 '''
-R^2 = 0.28190139872224346
+R^2 = 0.2826857471840979
 '''
 
 # GBM model
@@ -96,13 +96,13 @@ corr_gbm = corr_matrix_gbm[0,1]
 R_sq_gbm = corr_gbm**2
 print(R_sq_gbm)
 '''
-R^2 = 0.28006836735871177
+R^2 = 0.2783655990061132
 '''
 
 
 # predict on most recent data
 scaler = MinMaxScaler(feature_range=(0,1))
-predict_data = pd.read_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_predict_data_wk6.csv')
+predict_data = pd.read_csv('C:/Users/Ryan/Documents/air_yards_model/data/Week_6/airyards_predict_data_wk6.csv')
 predict_data2 = predict_data.iloc[:, np.r_[3:27]]
 predict_data3 = predict_data2.dropna().reset_index(drop=True)
 predict_data4 = scaler.fit_transform(predict_data3)
@@ -115,5 +115,5 @@ final_df['pred_fpts'] = (final_df['pred_fpts_rf'] + final_df['pred_fpts_gbm'])/2
 final_df['difference'] =  final_df['pred_fpts'] - final_df['season_avg_fantasy_points_ppr']
 final_df_results = final_df[['name', 'season_avg_fantasy_points_ppr', 'pred_fpts', 'difference']]
 
-final_df.to_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_predictions_wk6.csv', index=False)
-final_df_results.to_csv('C:/Users/Ryan/Documents/air_yards_model/data/airyards_clean_predictions_wk6.csv', index=False)
+final_df.to_csv('C:/Users/Ryan/Documents/air_yards_model/data/Week_6/airyards_predictions_wk6.csv', index=False)
+final_df_results.to_csv('C:/Users/Ryan/Documents/air_yards_model/data/Week_6/airyards_clean_predictions_wk6.csv', index=False)

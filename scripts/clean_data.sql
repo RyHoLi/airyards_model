@@ -120,6 +120,7 @@ AND a.season >= 2006
 ) a
 ;
 
+
 drop table if exists airyards_model_predict_data;
 CREATE TEMP TABLE airyards_model_predict_data AS
 SELECT
@@ -284,4 +285,4 @@ ON (a.player_id = b.player_id
 
 
 COPY airyards_model_data to 'C:/Users/Ryan/Documents/air_yards_model/data/airyards_data.csv' csv header;
-COPY airyards_model_predict_data2 to 'C:/Users/Ryan/Documents/air_yards_model/data/airyards_predict_data_wk6.csv' csv header;
+COPY airyards_model_predict_data2 to 'C:/Users/Ryan/Documents/air_yards_model/data/Week_6/airyards_predict_data_wk6.csv' csv header;
