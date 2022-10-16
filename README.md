@@ -20,9 +20,14 @@ Predictors used:
 - Recent WOPR until each week
 - Recent Fantasy Points Scored until each week
 - Career Average Fantasy Points until each week
+- Last week's fantasy points scored
+- Last week's wopr
+- Two weeks ago's fantasy points scored
+- Two weeks ago's wopr
 
 Summary of steps:
 1. The script clean_data.sql pulls and formats training data from a postgres database. The career stats begin from 2000 whereas the training data begins from 2006.
 1a. The query also pulls the data to be predicted for each week.
-2. The airyards_model_script.py script further cleans the data in a format that can be used to train the model to make predictions.
+2. The airyards_model_script.py script further cleans the data in a format that can be used to train the model to make predictions and then makes predictions for each week.
+
 
