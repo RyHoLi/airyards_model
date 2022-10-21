@@ -22,8 +22,7 @@ Predictors used:
 - Career Average Fantasy Points until each week
 - Last week's fantasy points scored
 - Last week's wopr
-- Two weeks ago's fantasy points scored
-- Two weeks ago's wopr
+
 
 Summary of steps:
 1. The script clean_data.sql pulls and formats training data from a postgres database. The career stats begin from 2000 whereas the training data begins from 2006.
